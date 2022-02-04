@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Controller;
+
+use Symfony\Bundle\FrameworkBundle\ Controller\AbstractController;
+use Symfony\component\httpFoundation\Response;
+use Symfony\component\Routing\Annotation\Route;
+use Twig\Environment;
+
+class HomeController extends AbstractController
+
+{
+      /**
+      * @var Environment
+      */
+      private $twig;
+
+    public function _construct(Environment $twig)
+    {
+       $this->twig->$twig;
+
+    }
+
+     /**
+     * @Route("/"), name="home")
+     *@return Response
+     */
