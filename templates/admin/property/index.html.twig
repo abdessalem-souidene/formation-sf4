@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container mt-4"></div>
-<h1> Gérer les biens</h1>
+<h1>Gérer les biens</h1>
 {% for message in app.flashes ('succes') %}
  <div class="alert alert.succes">
      {{ message }}
@@ -25,7 +25,7 @@
                <a href="{{ path('admin.property.edit', {id: property.id}) }}" class="btn btn-secondary">Editer</a>
                 <form method="post" action="{{path('admin.property.delete',{id:property.id)}}" Style="display:
         inline_block"onsubmit='return confirm('Etes vous vraiment sur ?') >
-                   <input type="hidden" name="_methode" value="DELETE">Supprimer </button>
+                   <input type="hidden" name="_methode" value="DELETE"> Supprimer </button>
                 </from>
             </td>
         </tr>

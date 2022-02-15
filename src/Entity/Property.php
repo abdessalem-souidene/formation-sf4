@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\PropertyRepository;
-use Doctrine\ORM\Mapping as ORM;
+use App\Controller\PropertyRepository;
 use cocour\Slugify\Slugify;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
-use phpDocumentor\Reflection\Types\String_;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\{Constraint as Assert};
+
 
 /**
  * @ORM\Entity(repositoryClass=PropertyRepository::class)
+ * @UniqueEntity("title)
  */
 class Property
 {
@@ -23,72 +25,75 @@ class Property
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
+     * @Assert\Length(min=5,max=255)
      * @ORM\Column(type="string", length=255)
      */
-    private $title;
+    private ?string $title;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $description;
+    private ?string $description;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $surface;
+    private ?int $surface;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Range(min="10, max=100")
+     */
+    private ?int $rooms;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $rooms;
+    private ?int $bedrooms;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $bedrooms;
+    private ?int $floor;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $floor;
+    private ?int $price;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $price;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $heat;
+    private ?int $heat;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $city;
+    private ?string $city;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adress;
+    private ?string $adress;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $postal_�code;
+    private ?string $postal_�code;
 
     /**
+     * @Assert\Regex("\^[0-9]{5}$/")
      * @ORM\Column(type="boolean", options={"default": false})
      */
-    private $sold = false;
+    private bool $sold = false;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
-    private $created_at;
+    private \DateTime $created_at;
     public function __construct()
     {
         $this->created_at = new \DateTime();
@@ -114,7 +119,7 @@ class Property
 
     public function getSlug() : String
     {
-        Return= (new Slugify())->$slugify->slugify($this->title);
+        Return  (new Slugify())->$slugify->slugify($this->title);
     }
 
     public function getDescription(): ?string

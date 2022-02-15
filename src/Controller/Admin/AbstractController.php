@@ -1,6 +1,6 @@
 <?php
 
-namespace Symfony\Bundle\FrameworkBundle\Controller;
+namespace App\Controller\Admin;
 
 class AbstractController
 {
